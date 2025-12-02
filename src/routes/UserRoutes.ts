@@ -1,11 +1,13 @@
 import { Router } from 'express';
 import { UserController } from '../controller/UserController';
 import { UserRepository } from '../repositories/UserRepository';
+import { UserService } from '../service/UserService';
 
 const router = Router();
 
 const userRepository = new UserRepository();
-const userController = new UserController(userRepository);
+const userService = new UserService(userRepository); 
+const userController = new UserController(userService);
 
 router.get('/users', userController.getAll);
 router.get('/users/:id', userController.getById);
